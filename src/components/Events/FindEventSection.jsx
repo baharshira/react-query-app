@@ -7,6 +7,7 @@ import ErrorBlock from '../UI/ErrorBlock.jsx';
 import EventItem from './EventItem.jsx';
 
 export default function FindEventSection() {
+  // The search element pass as a reference
   const searchElement = useRef();
   const [searchTerm, setSearchTerm] = useState();
 
@@ -20,6 +21,7 @@ export default function FindEventSection() {
   function handleSubmit(event) {
     event.preventDefault();
     setSearchTerm(searchElement.current.value);
+    // using the reference in order to set the search term, so we can call fetch events with the right seatch term
   }
 
   let content = <p>Please enter a search term and to find events.</p>;

@@ -18,12 +18,12 @@ export default function EventForm({ inputData, onSubmit, children }) {
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
+        event.preventDefault(); // so that the browser won't user the default form submitting
 
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData);
 
-        onSubmit({ ...data, image: selectedImage });
+        onSubmit({ ...data, image: selectedImage }); // destructuring the data and sending the image to onSubmit
     }
 
     return (

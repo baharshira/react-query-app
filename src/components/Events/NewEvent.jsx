@@ -20,7 +20,7 @@ export default function NewEvent() {
   });
 
   function handleSubmit(formData) {
-    mutate({ event: formData });
+    mutate({ event: formData }); // the event data is inside the form
   }
 
   return (

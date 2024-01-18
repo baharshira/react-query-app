@@ -12,17 +12,17 @@ export default function EditEvent() {
   const navigate = useNavigate();
 
   const { data, isError, error } = useQuery({
-    queryKey: ['events', params.id],
+    queryKey: ['events', params.id], // The query key, in addition to events, is the event id
     queryFn: ({ signal }) => fetchEvent({id: params.id, signal})
   })
 
-  //onMutate will run right after calling mutate
+  //onMutate will run right after calling mutate, so that the event will update
   const { mutate } = useMutation({
     mutationFn: updateEvent,
     onMutate: async (data) => {
       const newEvent = data.event;
 
-      // in case the updating fails:
+      // in case that the updating fails, we keep the previous event:
       await queryClient.cancelQueries({queryKey: ['events', params.id]});
       const previousEvent = queryClient.getQueryData(['events', params.id])
       queryClient.setQueriesData(['events', params.id], newEvent);
@@ -50,6 +50,7 @@ export default function EditEvent() {
 
   let content;
 
+  // The content will change conditionally, depends on the status from the query
   if (isError) {
     content = <>
       <ErrorBlock title="Failed to load event" message={error.info?.message || "Failed to load event"}/>
@@ -59,6 +60,7 @@ export default function EditEvent() {
     </>
   }
 
+  // If the query succeed:
   if (data) {
     content = <>
       <EventForm inputData={data} onSubmit={handleSubmit}>
