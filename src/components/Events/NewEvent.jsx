@@ -13,7 +13,8 @@ export default function NewEvent() {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: createNewEvent,
     onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['events']}) // the cache is irrelevant cuz it wont show the new event, so we use invalidateQueries
+        queryClient.invalidateQueries({queryKey: ['events']})
+        // the cache is irrelevant because it wont show the new event, so we use invalidateQueries
         navigate('/events');
     }
   });

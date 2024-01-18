@@ -2,8 +2,10 @@ import { QueryClient } from '@tanstack/react-query';
 
 export const queryClient = new QueryClient();
 
+// This page responsible for data fetching
+// The query client is declared but unused here, so we can access him from another component
+// The query client usually used to modify the page after fetching/modifying data
 export async function fetchEvents({ signal, searchTerm, max }) {
-    console.log(searchTerm);
     let url = 'http://localhost:3000/events';
 
     if (searchTerm && max) {

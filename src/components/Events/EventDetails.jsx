@@ -19,6 +19,7 @@ export default function EventDetails() {
   })
 
   // the mutate function will be triggered on delete
+  // destructing the useMutate returned values
   const { mutate,
     isPending: isPendingDeletion,
     isError: isErrorDeleting,
@@ -27,7 +28,7 @@ export default function EventDetails() {
     mutationFn: deleteEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['events'],
+        queryKey: ['events'], // to make this event uncached
         refetchType: 'none' // to make sure that this event won't be triggered again
       });
       navigate('/events');

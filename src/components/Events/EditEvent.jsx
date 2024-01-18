@@ -22,6 +22,7 @@ export default function EditEvent() {
     onMutate: async (data) => {
       const newEvent = data.event;
 
+      // in case the updating fails:
       await queryClient.cancelQueries({queryKey: ['events', params.id]});
       const previousEvent = queryClient.getQueryData(['events', params.id])
       queryClient.setQueriesData(['events', params.id], newEvent);
@@ -31,12 +32,14 @@ export default function EditEvent() {
     onError: (error, data, context) => {
       queryClient.setQueryData(['events', params.id], context.previousEvent) // rolling back to the original data if updating fails
     },
+    // making the prior event invalid (and out of cache)
     onSettled: () => {
       queryClient.invalidateQueries(['events', params.id]);
     }
   })
 
   function handleSubmit(formData) {
+    // the mutate function will trigger the data updating
     mutate({ id: params.id, event: formData });
     navigate('../');
   }

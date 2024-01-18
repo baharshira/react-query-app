@@ -5,6 +5,8 @@ import ErrorBlock from '../UI/ErrorBlock.jsx';
 import EventItem from './EventItem.jsx';
 import { fetchEvents } from '../../util/http.js';
 
+
+// In this component we want to show the 3 newest events in the "New Events" section
 export default function NewEventsSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['events', { max: 3 }],
