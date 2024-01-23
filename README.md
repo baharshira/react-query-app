@@ -1,3 +1,8 @@
+# Introduction
+
+This app's main purpose it to practice React Query, with useQuery and useMutate in order to fetch data.
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
