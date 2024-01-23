@@ -35,8 +35,8 @@ export default function EventDetails() {
     }
   })
 
-  // I added handle start and handle stop in case the user regrets and don't want to delete
-  // In that case I'll set the deleting state to false again
+  // the handle start and handle stop in case the user regrets and don't want to delete
+  // in that case, set the deleting state to false again
   function handleStratDelete() {
     setIsDeleting(true);
   }
@@ -45,7 +45,7 @@ export default function EventDetails() {
     setIsDeleting(false);
   }
 
-  // This method will only be triggered after the user actually agree to delete
+  // this method will only be triggered after the user actually agree to delete
   function handleDelete() {
     mutate({ id: params.id });
   }

@@ -11,6 +11,7 @@ export default function EditEvent() {
   const params = useParams()
   const navigate = useNavigate();
 
+  // fetching event data
   const { data, isError, error } = useQuery({
     queryKey: ['events', params.id], // The query key, in addition to events, is the event id
     queryFn: ({ signal }) => fetchEvent({id: params.id, signal})
@@ -30,17 +31,19 @@ export default function EditEvent() {
       return { previousEvent }
     },
     onError: (error, data, context) => {
-      queryClient.setQueryData(['events', params.id], context.previousEvent) // rolling back to the original data if updating fails
+      // rolling back to the original data if updating fails
+      queryClient.setQueryData(['events', params.id], context.previousEvent)
     },
-    // making the prior event invalid (and out of cache)
+    // making the prior event invalid (and out of cache) in case of success
     onSettled: () => {
       queryClient.invalidateQueries(['events', params.id]);
     }
   })
 
   function handleSubmit(formData) {
-    // the mutate function will trigger the data updating
-    mutate({ id: params.id, event: formData });
+    // the mutate function (mutationFn) will trigger the data updating
+    mutate({ id: params.id, event: formData }); // the params for useMutate
+    // navigating back to the events page
     navigate('../');
   }
 
@@ -74,6 +77,7 @@ export default function EditEvent() {
     </>
   }
 
+  // creating a modal, depends on the content statue (success/ error)
   return (
     <Modal onClose={handleClose}>
       {content}

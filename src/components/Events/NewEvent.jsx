@@ -14,7 +14,7 @@ export default function NewEvent() {
     mutationFn: createNewEvent,
     onSuccess: () => {
         queryClient.invalidateQueries({queryKey: ['events']})
-        // the cache is irrelevant because it wont show the new event, so we use invalidateQueries
+        // the cache is irrelevant because it won't show the new event, so we use invalidateQueries
         navigate('/events');
     }
   });

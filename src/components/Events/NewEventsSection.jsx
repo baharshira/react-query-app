@@ -9,7 +9,7 @@ import { fetchEvents } from '../../util/http.js';
 // In this component we want to show the 3 newest events in the "New Events" section
 export default function NewEventsSection() {
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['events', { max: 3 }],
+    queryKey: ['events', { max: 3 }], //we'll show maximum 3 events in the "New Events" section
     queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
     staleTime: 5000,
   });
